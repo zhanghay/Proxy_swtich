@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "代理开关 · 127.0.0.1:7890",
+  "version": "2.2.0",
+  "description": "点击图标打开面板，一键把浏览器代理设为 127.0.0.1（端口可改，默认 7890）；关闭时强制直连",
+  "permissions": ["proxy", "storage"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "代理开关"
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>代理开关</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    width: 250px;
+    padding: 18px 16px 14px;
+    font: 13px/1.6 -apple-system, "Segoe UI", "Microsoft YaHei", sans-serif;
+    color: #374151;
+  }
+  .row {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 12px;
+  }
+  .title { font-size: 14px; font-weight: 600; }
+  .switch { position: relative; width: 44px; height: 24px; }
+  .switch input { opacity: 0; width: 0; height: 0; }
+  .slider {
+    position: absolute; inset: 0; border-radius: 999px;
+    background: #d1d5db; cursor: pointer;
+    transition: background .18s;
+  }
+  .slider::before {
+    content: ""; position: absolute; width: 18px; height: 18px;
+    left: 3px; top: 3px; border-radius: 50%; background: #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,.3);
+    transition: transform .18s;
+  }
+  input:checked + .slider { background: #22c55e; }
+  input:checked + .slider::before { transform: translateX(20px); }
+  .status {
+    padding: 8px 10px; border-radius: 6px; font-size: 12px;
+    background: #f3f4f6; color: #6b7280; word-break: break-all;
+  }
+  .status.on  { background: #dcfce7; color: #16a34a; }
+  .status.off { background: #f3f4f6; color: #6b7280; }
+  .portrow {
+    display: flex; align-items: center; gap: 6px; margin-bottom: 12px;
+  }
+  .portrow .plabel { font-size: 12px; color: #6b7280; }
+  #port {
+    width: 72px; padding: 4px 6px; border: 1px solid #d1d5db; border-radius: 6px;
+    font: inherit; font-size: 12px; color: #374151;
+  }
+  #port:focus { outline: none; border-color: #22c55e; }
+  #applyPort {
+    padding: 4px 10px; border: 1px solid #d1d5db; border-radius: 6px;
+    background: #f9fafb; font: inherit; font-size: 12px; color: #374151; cursor: pointer;
+  }
+  #applyPort:hover { background: #f3f4f6; }
+  #applyPort:active { background: #e5e7eb; }
+  .warn {
+    display: none; margin-top: 8px; font-size: 12px;
+    padding: 6px 8px; border-radius: 6px;
+    background: #fef3c7; color: #b45309;
+  }
+  .warn.show { display: block; }
+</style>
+</head>
+<body>
+  <div class="row">
+    <span class="title">浏览器代理</span>
+    <label class="switch">
+      <input type="checkbox" id="toggle">
+      <span class="slider"></span>
+    </label>
+  </div>
+  <div class="status off" id="status">已关闭（直连，不走代理）</div>
+  <div class="portrow">
+    <span class="plabel">代理端口</span>
+    <input type="number" id="port" value="7890" min="1" max="65535" step="1" inputmode="numeric">
+    <button id="applyPort">应用</button>
+  </div>
+  <div class="warn" id="warn"></div>
+  <script src="popup.js"></script>
+</body>
+</html>
